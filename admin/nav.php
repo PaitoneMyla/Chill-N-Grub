@@ -23,6 +23,9 @@
 <li>
 <a href="category.php" class="category">Category</a>
 </li>
+<li>
+<a href="mesa.php" class="category">Tables</a>
+</li>
 </ul>
 	
 </div>

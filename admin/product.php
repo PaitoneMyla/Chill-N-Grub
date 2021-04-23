@@ -1,4 +1,4 @@
-<?php include('db_conn.php'); ?>
+<?php include_once('db_conn.php'); ?>
 <?php include('heading.php'); ?>
 <?php include('nav.php'); ?>
 

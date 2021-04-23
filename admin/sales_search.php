@@ -20,7 +20,7 @@
                
            $date =date('m-d-Y');
            $sum=0; 
-           $sql=mysqli_query($conn,'SELECT sum(total_amount) AS value_sum FROM admin WHERE DATE(date) = DATE(NOW())');
+           $sql=mysqli_query($conn,'SELECT sum(total_amount) AS value_sum FROM order_details WHERE DATE(date) = DATE(NOW())');
            $query=mysqli_fetch_assoc($sql);
            $sum =$query['value_sum'];
            
@@ -56,7 +56,7 @@
                                     $enddate = $_POST['date2'];
                                     
                                     $sql=mysqli_query($conn,"SELECT sum(total_amount) AS value_sum
-                                    FROM admin WHERE DATE(date) between '$startdate' AND '$enddate' ");
+                                    FROM order_details WHERE DATE(date) between '$startdate' AND '$enddate' ");
                                                     $query=mysqli_fetch_assoc($sql);
                                                  $tl_sum =$query ['value_sum'];      
                                     
@@ -87,12 +87,12 @@
 
 left JOIN product p
 ON p.prod_id = o.prod_id
-left JOIN admin a 
-ON o.admin_id = a.admin_id
+left JOIN order_details od
+ON o.od_id = od.od_id
 left JOIN category c
 ON p.cat_id = c.cat_id
 
-WHERE a.date between '$startdate' and '$enddate'
+WHERE od.date between '$startdate' and '$enddate'
  
 GROUP by p.prod_name ;";
 					$query=$conn->query($sql);

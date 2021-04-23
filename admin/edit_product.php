@@ -3,7 +3,7 @@
 
 	$id=$_GET['product'];
 
-	$pname=$_POST['prod_name'];
+	$pname=$_POST['pname'];
 	$category=$_POST['category'];
 	$price=$_POST['price'];
 
@@ -18,12 +18,16 @@
 	}
 	else{
 		$newFilename=$fileinfo['filename'] ."_". time() . "." . $fileinfo['extension'];
-		move_uploaded_file($_FILES["photo"]["tmp_name"],"upload/" . $newFilename);
-		$location="upload/" . $newFilename;
+		move_uploaded_file($_FILES["photo"]["tmp_name"],"../img/" . $newFilename);
+		$location="../img/" . $newFilename;
 	}
 
-	$sql="update product set prod_name='$pname', cat_id='$category', photo='$location' where prod_id='$id'";
-	$conn->query($sql);
+	$sql1="update product set prod_name='$pname', cat_id='$category', prod_img='$location' where prod_id='$id'";
+	$conn->query($sql1);
+    
+    $sql2="update pricing set price='$price' where prod_id='$id'";
+	$conn->query($sql2);
+
 
 	header('location:product.php');
 ?>

@@ -12,5 +12,6 @@
 	<h1>Chill n grub</h1>
 
 	<a href="index.php">Logout</a>
+
 </body>
 </html>

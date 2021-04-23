@@ -2,7 +2,7 @@
 <?php include('db_conn.php'); ?>
 <?php include('heading.php'); ?>
 
-<div class="modal fade" id="details<?php echo $row['admin_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="details<?php echo $row['od_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content " style="background-color: rgba(0, 0, 0, .5)" >
             <div class="modal-header">
@@ -25,7 +25,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $sql="select * from orders left join product on product.prod_id=orders.prod_id left join pricing on product.prod_id=pricing.prod_id where admin_id='". $row['admin_id']."'";
+                                $sql="select * from orders left join product on product.prod_id=orders.prod_id left join pricing on product.prod_id=pricing.prod_id where od_id='". $row['od_id']."'";
                                 $dquery=$conn->query($sql);
                                 while($drow=$dquery->fetch_array()){
                                     ?>

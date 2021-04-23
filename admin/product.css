@@ -4,7 +4,7 @@ h1{
 	color: white;
 }
 body{
-	background-image: url('img/b2.jpg');
+	background-image: url(../img/b2.jpg);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;

@@ -3,7 +3,7 @@
 	if(isset($_POST['prod_id'])){
  
 		$tblnum=$_POST['tblnum'];
-		$sql="insert into admin (tblnum, date) values ('$tblnum', NOW())";
+		$sql="insert into order_details (tblnum, date) values ('$tblnum', NOW())";
 		$conn->query($sql);
 		$pid=$conn->insert_id;
  
@@ -21,12 +21,12 @@
 			$subt=$row['price']*$_POST['qty_'.$iterate];
 			$total+=$subt;
 
-			$sql="insert into orders (admin_id, prod_id, qty) values ('$pid', '$productid', '".$_POST['qty_'.$iterate]."')";
+			$sql="insert into orders (od_id, prod_id, qty) values ('$pid', '$productid', '".$_POST['qty_'.$iterate]."')";
 			$conn->query($sql);
 		}
 		endforeach;
  		
- 		$sql="update admin set total_amount='$total' where admin_id='$pid'";
+ 		$sql="update order_details set total_amount='$total' where od_id='$pid'";
  		$conn->query($sql);
 		header('location:sales.php');		
 	}

@@ -23,7 +23,7 @@
 		</thead>
 		<tbody>
 			<?php 
-				$sql="select * from admin order by admin_id desc";
+				$sql="select * from order_details order by od_id desc";
 				$query=$conn->query($sql);
 				while($row=$query->fetch_array()){
 					?>
@@ -32,7 +32,7 @@
 						<td><?php echo $row['tblnum']; ?></td>
 						<td class="text-left">&#8369; <?php echo number_format($row['total_amount'], 2); ?></td>
 						<td><?php echo $row['stat']; ?></td>
-						<td><a href="#details<?php echo $row['admin_id']; ?>" data-toggle="modal" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span> View </a>
+						<td><a href="#details<?php echo $row['od_id']; ?>" data-toggle="modal" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span> View </a>
 							<?php include('sales_disp.php'); ?>
 						</td>
 					</tr>
