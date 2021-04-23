@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2021 at 07:25 PM
+-- Generation Time: Apr 23, 2021 at 03:25 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -20,37 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `chill_n_grub`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `admin_id` int(11) NOT NULL,
-  `tblnum` varchar(11) NOT NULL,
-  `total_amount` double NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `stat` varchar(1) NOT NULL COMMENT 'P is for paid and U'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`admin_id`, `tblnum`, `total_amount`, `date`, `stat`) VALUES
-(26, 'a2c2', 0, '2021-04-01 22:02:30', ''),
-(27, 'a2c2', 0, '2021-04-01 22:05:32', ''),
-(28, 'a2c2', 1192, '2021-04-01 22:06:53', ''),
-(29, '3c', 2028, '2021-04-01 22:56:58', ''),
-(30, '5', 500, '2021-04-01 23:47:47', ''),
-(31, '2', 1144, '2021-04-02 00:15:40', ''),
-(32, '3', 150, '2021-04-02 01:56:29', ''),
-(33, '2', 1144, '2021-04-02 23:38:04', ''),
-(34, '3', 300, '2021-04-03 00:15:45', ''),
-(35, '1', 797, '2021-04-03 02:27:45', ''),
-(36, '3', 573, '2021-04-09 02:56:23', '');
 
 -- --------------------------------------------------------
 
@@ -77,12 +46,35 @@ INSERT INTO `category` (`cat_id`, `cat_desc`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mesa`
+--
+
+CREATE TABLE `mesa` (
+  `tbl_id` int(11) NOT NULL,
+  `tbnum` varchar(64) NOT NULL,
+  `status` varchar(1) NOT NULL DEFAULT 'A' COMMENT 'A is for available and O for occupied',
+  `qr_img_file` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mesa`
+--
+
+INSERT INTO `mesa` (`tbl_id`, `tbnum`, `status`, `qr_img_file`) VALUES
+(1, '1', 'O', 'table1.jpg'),
+(2, '2', 'O', 'table2.png'),
+(3, '3', 'O', 'table3.png'),
+(9, 'test', '', 'img/qr/23_1619165032.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `admin_id` int(11) NOT NULL,
+  `od_id` int(11) NOT NULL,
   `prod_id` int(11) NOT NULL,
   `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -91,7 +83,7 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `admin_id`, `prod_id`, `qty`) VALUES
+INSERT INTO `orders` (`order_id`, `od_id`, `prod_id`, `qty`) VALUES
 (21, 26, 48, 2),
 (22, 26, 82, 1),
 (23, 27, 48, 2),
@@ -113,7 +105,60 @@ INSERT INTO `orders` (`order_id`, `admin_id`, `prod_id`, `qty`) VALUES
 (39, 35, 11, 1),
 (40, 35, 29, 1),
 (41, 36, 13, 1),
-(42, 36, 4, 2);
+(42, 36, 4, 2),
+(43, 37, 1, 100),
+(44, 38, 1, 100),
+(45, 39, 1, 100),
+(46, 39, 82, 100),
+(47, 40, 1, 100),
+(48, 40, 82, 100),
+(49, 41, 1, 100),
+(50, 41, 82, 100),
+(51, 42, 18, 100),
+(52, 42, 82, 100),
+(53, 43, 1, 100),
+(54, 44, 1, 123),
+(55, 45, 1, 100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `od_id` int(11) NOT NULL,
+  `tblnum` varchar(11) NOT NULL,
+  `total_amount` double NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `stat` varchar(1) NOT NULL DEFAULT 'U' COMMENT 'P is for paid and U'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`od_id`, `tblnum`, `total_amount`, `date`, `stat`) VALUES
+(26, 'a2c2', 0, '2021-04-01 22:02:30', ''),
+(27, 'a2c2', 0, '2021-04-01 22:05:32', ''),
+(28, 'a2c2', 1192, '2021-04-01 22:06:53', ''),
+(29, '3c', 2028, '2021-04-01 22:56:58', 'P'),
+(30, '5', 500, '2021-04-01 23:47:47', ''),
+(31, '2', 1144, '2021-04-02 00:15:40', ''),
+(32, '3', 150, '2021-04-02 01:56:29', 'P'),
+(33, '2', 1144, '2021-04-02 23:38:04', ''),
+(34, '3', 300, '2021-04-03 00:15:45', 'P'),
+(35, '1', 797, '2021-04-03 02:27:45', ''),
+(36, '3', 573, '2021-04-09 02:56:23', 'P'),
+(37, '3', 43600, '2021-04-15 16:17:31', 'P'),
+(38, '3', 0, '2021-04-15 16:19:19', 'P'),
+(39, '3', 53600, '2021-04-15 16:19:33', 'U'),
+(40, '3', 53600, '2021-04-15 16:19:41', 'P'),
+(41, '3', 53600, '2021-04-15 16:21:44', 'P'),
+(42, '3', 37900, '2021-04-15 16:26:54', 'P'),
+(43, '3', 43600, '2021-04-15 16:32:01', ''),
+(44, '3', 53628, '2021-04-15 16:33:25', ''),
+(45, '3', 43600, '2021-04-15 16:49:43', '');
 
 -- --------------------------------------------------------
 
@@ -132,7 +177,7 @@ CREATE TABLE `pricing` (
 --
 
 INSERT INTO `pricing` (`price_id`, `prod_id`, `price`) VALUES
-(1, '1', 436),
+(1, '1', 7.53),
 (2, '2', 233),
 (3, '3', 757),
 (4, '4', 143),
@@ -233,7 +278,8 @@ INSERT INTO `pricing` (`price_id`, `prod_id`, `price`) VALUES
 (99, '99', 198),
 (100, '100', 176),
 (101, '101', 169),
-(102, '102', 134);
+(102, '102', 134),
+(105, '', 430);
 
 -- --------------------------------------------------------
 
@@ -253,7 +299,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`prod_id`, `prod_name`, `cat_id`, `prod_img`) VALUES
-(1, 'Broccoli and Garlic-ricotta toasts with hot honey', 1, NULL),
+(1, 'Broccoli and Garlic-ricotta toasts with hot  honey', 1, ''),
 (2, 'Sea Bream Crudo with lemon and olives', 1, NULL),
 (3, 'Pasta e Fagioli with Escarole', 1, NULL),
 (4, 'Flatbread Capreses', 1, NULL),
@@ -299,7 +345,6 @@ INSERT INTO `product` (`prod_id`, `prod_name`, `cat_id`, `prod_img`) VALUES
 (45, 'Perfect Biscotti', 2, NULL),
 (46, 'Martini (Cocktail)', 3, NULL),
 (47, 'Spicy Citrus Moscow Mule', 3, NULL),
-(48, 'Dark & Stormy', 3, NULL),
 (49, 'Bellini', 3, NULL),
 (50, 'Gin and Tonic Cocktail', 3, NULL),
 (51, 'Classic Sidecar Cocktail', 3, NULL),
@@ -353,19 +398,11 @@ INSERT INTO `product` (`prod_id`, `prod_name`, `cat_id`, `prod_img`) VALUES
 (99, 'Pancotto pugliese', 5, NULL),
 (100, 'Pizzette and Vegan Mozzarella and Onion Relish', 5, NULL),
 (101, 'Salami-wrapped griddled fenel', 5, NULL),
-(102, 'Calabrese pizza', 5, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `table`
---
-
-CREATE TABLE `table` (
-  `tbl_id` int(11) NOT NULL,
-  `tbnum` varchar(64) NOT NULL,
-  `status` varchar(1) NOT NULL COMMENT 'P is for pending A is for available R is for reserved'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(102, 'Calabrese pizza', 5, NULL),
+(211, 'tubig', 3, ''),
+(212, 'tubig2', 3, ''),
+(213, 'tubig3', 3, ''),
+(214, 'tubigagain', 3, '');
 
 -- --------------------------------------------------------
 
@@ -374,21 +411,24 @@ CREATE TABLE `table` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) DEFAULT NULL,
-  `user_id` varchar(255) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
   `user_name` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL,
+  `usertype` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_name`, `password`, `usertype`) VALUES
+(1, 'waiter1', '1retiaw', 'W'),
+(2, 'waiter2', '2retiaw', 'W'),
+(3, 'admin1', 'admin123', 'A');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`admin_id`);
 
 --
 -- Indexes for table `category`
@@ -397,10 +437,22 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`cat_id`);
 
 --
+-- Indexes for table `mesa`
+--
+ALTER TABLE `mesa`
+  ADD PRIMARY KEY (`tbl_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`od_id`);
 
 --
 -- Indexes for table `pricing`
@@ -415,50 +467,56 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`prod_id`);
 
 --
--- Indexes for table `table`
+-- Indexes for table `users`
 --
-ALTER TABLE `table`
-  ADD PRIMARY KEY (`tbl_id`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
---
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `mesa`
+--
+ALTER TABLE `mesa`
+  MODIFY `tbl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `pricing`
 --
 ALTER TABLE `pricing`
-  MODIFY `price_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `price_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `prod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
+  MODIFY `prod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 
 --
--- AUTO_INCREMENT for table `table`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `table`
-  MODIFY `tbl_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
