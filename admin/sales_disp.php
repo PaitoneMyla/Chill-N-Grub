@@ -4,7 +4,7 @@
 
 <div class="modal fade" id="details<?php echo $row['od_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content " style="background-color: rgba(0, 0, 0, .5)" >
+        <div class="modal-content " style="background-color:white; color: black;" >
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <center><h4 class="modal-title" id="myModalLabel">Sales Full Details</h4></center>
@@ -16,7 +16,7 @@
                            <?php echo date('M d, Y h:i A', strtotime($row['date'])) ?>
                         </span>
                     </h5>
-                    <table class="table" style="color:red">
+                    <table class="table" style="color:black">
                         <thead>
                             <th>Product Name</th>
                             <th>Price</th>

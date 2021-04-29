@@ -17,6 +17,9 @@
     <li>
     <a href="sales.php" class="orders">Orders</a>
     </li>
+    <li>
+    <a href="logout.php" class="orders">Logout</a>
+    </li>
     </ul>
 	
   </div>

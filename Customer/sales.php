@@ -1,6 +1,14 @@
-<?php include('db_conn.php'); ?>
-<?php include('heading.php'); ?>
-<?php include('nav.php') ?>
+<?php include('db_conn.php'); 
+      include('heading.php');
+      include('nav.php') ;
+session_start();
+if(isset($_GET['tablenumber'])){
+    if($_SESSION['tablenumber'] !== $_GET['tablenumber'] ){
+        header("location: ?tablenumber={$_SESSION['tablenumber']}");
+    }
+}
+?>
+      
 
 <!DOCTYPE html>
 <html>
@@ -24,12 +32,17 @@
 		</thead>
 		<tbody>
 			<?php 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 				$sql="select * from admin order by admin_id desc";
 =======
 				$sql="select * from order_details where tblnum = '{$_SESSION['tablenumber']}' and stat NOT IN ('P') order by od_id desc";
 >>>>>>> Stashed changes
+=======
+				$sql="select * from admin where tblnum = '{$_SESSION['tablenumber']}' and stat NOT IN ('P') order by admin_id desc";
+>>>>>>> becb9174cda6a4f3ef9ddb6b61f440e6486b9304
 				$query=$conn->query($sql);
+               //..check count..
 				while($row=$query->fetch_array()){
 					?>
 					<tr>

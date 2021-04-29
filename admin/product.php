@@ -1,6 +1,6 @@
 <?php include_once('db_conn.php'); ?>
 <?php include('heading.php'); ?>
-<?php include('nav.php'); ?>
+<?php include('nav.php') ?>
 
 <!DOCTYPE html>
 <html>
@@ -56,10 +56,9 @@
 							<td><?php echo $row['prod_name']; ?></td>
 							<td>&#8369; <?php echo number_format($row['price'], 2); ?></td>
 							<td>
-							    
+							    <?php include('product_modal.php'); ?>
 								<a href="#editproduct<?php echo $row['prod_id']; ?>" data-toggle="modal" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-pencil"></span> Edit</a> || <a href="#deleteproduct<?php echo $row['prod_id']; ?>" data-toggle="modal" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-								<?php include('editproduct_modal.php'); ?>
-								<?php include('deleteproduct_modal.php'); ?>
+								
 							</td>
 						</tr>
 						<?php

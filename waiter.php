@@ -10,7 +10,11 @@
        <?php
         include_once "includes/db_conn.php";
         
+<<<<<<< HEAD
         $display_tbl_sql = "SELECT * FROM `mesa`";
+=======
+        $display_tbl_sql = "SELECT * FROM `table`";
+>>>>>>> becb9174cda6a4f3ef9ddb6b61f440e6486b9304
 
 		$result = mysqli_query($conn,$display_tbl_sql);
 		if(mysqli_num_rows($result) > 0)
